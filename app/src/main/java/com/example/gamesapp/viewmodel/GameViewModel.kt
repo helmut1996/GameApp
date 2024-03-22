@@ -46,11 +46,20 @@ fun getGameById(id:Int){
                 name = result?.name ?: "",
                 description_raw = result?.description_raw ?: "",
                 metacritic = result?.metacritic ?: 111,
-                website = result?.website ?: "",
+                website = result?.website ?: "sin web",
                 background_image = result?.background_image ?: ""
             )
         }
     }
 }
 
+     fun clean(){
+         state = state.copy(
+             name ="",
+             description_raw = "",
+             metacritic =  111,
+             website =  "sin web",
+             background_image =  ""
+         )
+     }
 }
