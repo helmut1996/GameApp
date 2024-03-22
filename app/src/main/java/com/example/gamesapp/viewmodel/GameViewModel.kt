@@ -1,7 +1,11 @@
 package com.example.gamesapp.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gamesapp.State.GameState
 import com.example.gamesapp.model.GameList
 import com.example.gamesapp.repository.Repositorygame
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +22,9 @@ class GameViewModel @Inject constructor(private val repository: Repositorygame) 
     private val _game = MutableStateFlow<List<GameList>>(emptyList())
     val games = _game.asStateFlow()
 
+    var state by mutableStateOf(GameState())
+    private set
+
     init {
         fetchGame()
     }
@@ -30,4 +37,20 @@ class GameViewModel @Inject constructor(private val repository: Repositorygame) 
             }
         }
     }
+
+fun getGameById(id:Int){
+    viewModelScope.launch {
+        withContext(Dispatchers.IO){
+            val result = repository.getGamesById(id)
+            state = state.copy(
+                name = result?.name ?: "",
+                description_raw = result?.description_raw ?: "",
+                metacritic = result?.metacritic ?: 111,
+                website = result?.website ?: "",
+                background_image = result?.background_image ?: ""
+            )
+        }
+    }
+}
+
 }

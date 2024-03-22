@@ -29,13 +29,13 @@ fun HomeView(gameViewModel: GameViewModel, navController: NavController) {
             }
         }
     ) {
-        ContentsHomeView(gameViewModel = gameViewModel, pad = it)
+        ContentsHomeView(gameViewModel = gameViewModel, pad = it,navController)
     }
 }
 
 
 @Composable
-fun ContentsHomeView(gameViewModel: GameViewModel, pad: PaddingValues) {
+fun ContentsHomeView(gameViewModel: GameViewModel, pad: PaddingValues, navController: NavController) {
     val games by gameViewModel.games.collectAsState()
     LazyColumn(
         modifier = Modifier.padding(pad)
@@ -43,7 +43,7 @@ fun ContentsHomeView(gameViewModel: GameViewModel, pad: PaddingValues) {
     ) {
         items(games) { item ->
             CardGames(game = item) {
-
+                navController.navigate("DetailView/${item.id}")
             }
             Text(
                 text = item.name,
