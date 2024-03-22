@@ -43,9 +43,8 @@ fun DetailView(viewModel: GameViewModel, navController: NavController, id: Int) 
 
     Scaffold(
         topBar = {
-            MainTopBar(title = viewModel.state.name, showBackButton = true) {
-                navController.popBackStack()
-            }
+            MainTopBar(title = viewModel.state.name, showBackButton = true ,onClickBackButton = {
+                navController.popBackStack() }) {}
         }
 
     ) {

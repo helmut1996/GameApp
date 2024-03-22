@@ -24,8 +24,8 @@ import com.example.gamesapp.viewmodel.GameViewModel
 fun HomeView(gameViewModel: GameViewModel, navController: NavController) {
     Scaffold(
         topBar = {
-            MainTopBar(title = "API GAMES") {
-
+            MainTopBar(title = "API GAMES", onClickBackButton = { /*TODO*/ }) {
+                navController.navigate("SearchGameView")
             }
         }
     ) {
@@ -38,7 +38,8 @@ fun HomeView(gameViewModel: GameViewModel, navController: NavController) {
 fun ContentsHomeView(gameViewModel: GameViewModel, pad: PaddingValues, navController: NavController) {
     val games by gameViewModel.games.collectAsState()
     LazyColumn(
-        modifier = Modifier.padding(pad)
+        modifier = Modifier
+            .padding(pad)
             .background(Color(COMSTOM_COLOR))
     ) {
         items(games) { item ->

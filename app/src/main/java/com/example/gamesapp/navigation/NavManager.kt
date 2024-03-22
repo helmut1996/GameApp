@@ -9,6 +9,7 @@ import androidx.navigation.navArgument
 import com.example.gamesapp.viewmodel.GameViewModel
 import com.example.gamesapp.views.DetailView
 import com.example.gamesapp.views.HomeView
+import com.example.gamesapp.views.SearchGameView
 
 @Composable
 fun NavManager(viewModel: GameViewModel){
@@ -22,6 +23,9 @@ fun NavManager(viewModel: GameViewModel){
         ) ){
             val id = it.arguments?.getInt("id") ?: 0
             DetailView(viewModel = viewModel, navController, id)
+        }
+        composable("SearchGameView"){
+            SearchGameView(viewModel , navController  )
         }
     }
 }

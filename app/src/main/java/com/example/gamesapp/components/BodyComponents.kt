@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -38,7 +39,11 @@ import com.example.gamesapp.util.Constans.Companion.COMSTOM_COLOR_GREEN
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTopBar(title: String, showBackButton: Boolean = false, onClickBackButton: () -> Unit) {
+fun MainTopBar(title: String,
+               showBackButton: Boolean = false,
+               onClickBackButton: () -> Unit,
+               onClickAction: () -> Unit
+) {
     TopAppBar(title = {
         Text(
             text = title,
@@ -54,6 +59,18 @@ fun MainTopBar(title: String, showBackButton: Boolean = false, onClickBackButton
                 IconButton(onClick = { onClickBackButton() }) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "",
+                        tint = Color.White
+                    )
+                }
+            }
+        },
+        actions = {
+
+            if (!showBackButton) {
+                IconButton(onClick = { onClickAction() }) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
                         contentDescription = "",
                         tint = Color.White
                     )
